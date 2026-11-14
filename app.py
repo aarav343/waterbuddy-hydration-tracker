@@ -1,6 +1,5 @@
 import streamlit as st
 
-
 st.set_page_config(page_title="WaterBuddy", page_icon="💧", layout="centered")
 
 AGE_GOALS = {
@@ -41,6 +40,14 @@ def reset_new_day():
     st.session_state.show_reset_confirm = False
 
 
+def show_message(message):
+    st.markdown(
+        f'<div style="padding:12px 14px;border:1px solid #c9e2e6;border-radius:12px;'
+        f'background:#edf7f8;color:#173744;font-weight:600;">{message}</div>',
+        unsafe_allow_html=True,
+    )
+
+
 for key, value in {
     "age_group": "Adults (14 to 64)",
     "daily_goal": 2250,
@@ -52,21 +59,12 @@ for key, value in {
     if key not in st.session_state:
         st.session_state[key] = value
 
-
 st.markdown(
     """
     <style>
-    :root {
-      color-scheme: light !important;
-      --primary-color: #087e99;
-      --background-color: #f3f7f8;
-      --secondary-background-color: #ffffff;
-      --text-color: #173744;
-    }
-    html, body, .stApp,
-    [data-testid="stAppViewContainer"],
-    [data-testid="stMain"],
-    [data-testid="stMainBlockContainer"] {
+    :root { color-scheme: light !important; }
+    html, body, .stApp, [data-testid="stAppViewContainer"],
+    [data-testid="stMain"], [data-testid="stMainBlockContainer"] {
       color-scheme: light !important;
       color: #173744 !important;
       background: #f3f7f8 !important;
@@ -78,89 +76,38 @@ st.markdown(
     [data-testid="stMain"] p, [data-testid="stMain"] label,
     [data-testid="stMain"] span, [data-testid="stMain"] [data-testid="stCaptionContainer"],
     [data-testid="stMain"] [data-testid="stMetricLabel"],
-    [data-testid="stMain"] [data-testid="stMetricValue"],
-    [data-testid="stMain"] [data-testid="stMetricDelta"] {
+    [data-testid="stMain"] [data-testid="stMetricValue"] {
       color: #173744 !important;
     }
-    [data-testid="stMain"] input,
-    [data-testid="stMain"] [role="combobox"],
+    [data-testid="stMain"] input, [data-testid="stMain"] [role="combobox"],
     [data-testid="stMain"] [role="spinbutton"],
     [data-testid="stMain"] [data-baseweb="select"],
     [data-testid="stMain"] [data-baseweb="input"] {
-      color: #173744 !important;
-      -webkit-text-fill-color: #173744 !important;
-      background: #ffffff !important;
-      background-image: none !important;
+      color: #173744 !important; -webkit-text-fill-color: #173744 !important;
+      background: #ffffff !important; background-image: none !important;
       border-color: #b9cdd3 !important;
     }
-    [data-testid="stMain"] [role="alert"],
-    [data-testid="stMain"] [data-testid="stAlert"] {
-      color: #173744 !important;
-      background: #edf7f8 !important;
-      background-image: none !important;
-      border: 1px solid #c9e2e6 !important;
-      border-radius: 12px !important;
-    }
-    [data-testid="stMain"] [role="alert"] *,
-    [data-testid="stMain"] [data-testid="stAlert"] * {
-      color: #173744 !important;
-      -webkit-text-fill-color: #173744 !important;
-      background-image: none !important;
-    }
-    [data-testid="stMain"] [role="progressbar"] {
-      background: #dcebed !important;
-      border-radius: 999px !important;
-    }
-    [data-testid="stMain"] [role="progressbar"] > div {
-      background: #0b91a5 !important;
-      border-radius: 999px !important;
-    }
+    [data-testid="stMain"] [role="progressbar"] { background: #dcebed !important; border-radius: 999px !important; }
+    [data-testid="stMain"] [role="progressbar"] > div { background: #0b91a5 !important; border-radius: 999px !important; }
     .block-container { max-width: 820px; padding: 1.5rem 1.1rem 3rem; }
-    .wb-hero {
-      display: flex; align-items: center; gap: 18px; margin: 0 0 1.4rem;
-      padding: 25px 27px; border-radius: 24px;
-      background: #087e99 !important;
-      box-shadow: 0 15px 35px rgba(9, 105, 124, .18);
-    }
-    .wb-drop {
-      display: grid; place-items: center; flex: 0 0 58px; height: 58px;
-      border: 1px solid rgba(255,255,255,.4); border-radius: 19px;
-      background: rgba(255,255,255,.16); font-size: 30px;
-    }
-    .wb-brand { color: white !important; font-size: 1.75rem; line-height: 1.15; font-weight: 800; letter-spacing: -.03em; }
-    .wb-tagline { color: #e7ffff !important; margin-top: 5px; font-size: .98rem; }
-    .wb-kicker { color: #e0ffff !important; font-size: .72rem; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; margin-bottom: 4px; }
-    [data-testid="stVerticalBlockBorderWrapper"] {
-      border: 1px solid #d5e1e5 !important; border-radius: 20px !important;
-      background: #ffffff !important; background-image: none !important;
-      box-shadow: 0 6px 18px rgba(24, 76, 91, .06);
-    }
-    [data-testid="stMetricLabel"] p { color: #55717c !important; font-size: .83rem !important; }
-    [data-testid="stMetricValue"] { color: #123b49 !important; font-weight: 750 !important; }
-    [data-testid="stProgress"] { margin: .45rem 0 .8rem; }
+    .wb-hero { display:flex; align-items:center; gap:18px; margin:0 0 1.4rem; padding:25px 27px; border-radius:24px; background:#087e99 !important; box-shadow:0 15px 35px rgba(9,105,124,.18); }
+    .wb-drop { display:grid; place-items:center; flex:0 0 58px; height:58px; border:1px solid rgba(255,255,255,.4); border-radius:19px; background:rgba(255,255,255,.16); font-size:30px; }
+    .wb-brand { color:white !important; font-size:1.75rem; line-height:1.15; font-weight:800; letter-spacing:-.03em; }
+    .wb-tagline { color:#e7ffff !important; margin-top:5px; font-size:.98rem; }
+    .wb-kicker { color:#e0ffff !important; font-size:.72rem; font-weight:800; letter-spacing:.13em; text-transform:uppercase; margin-bottom:4px; }
+    [data-testid="stVerticalBlockBorderWrapper"] { border:1px solid #d5e1e5 !important; border-radius:20px !important; background:#ffffff !important; background-image:none !important; box-shadow:0 6px 18px rgba(24,76,91,.06); }
+    [data-testid="stMetricLabel"] p { color:#55717c !important; font-size:.83rem !important; }
+    [data-testid="stMetricValue"] { color:#123b49 !important; font-weight:750 !important; }
+    [data-testid="stProgress"] { margin:.45rem 0 .8rem; }
     .wb-remaining { display:flex; align-items:center; gap:8px; margin-top:8px; padding:11px 14px; border-radius:13px; background:#eaf6f7; }
     .wb-remaining strong { color:#126a78; font-size:1rem; }
     .wb-remaining span { color:#54727c; font-size:.9rem; }
-    [data-testid="stMain"] button {
-      border-radius: 13px; border: 1px solid #c8e6eb; background: #eaf7f9;
-      color: #124757 !important; font-weight: 700;
-      transition: transform .15s ease, box-shadow .15s ease;
-    }
-    [data-testid="stMain"] button:hover { border-color: #6fc6ce; background: #def3f5; box-shadow: 0 5px 12px rgba(19, 117, 133, .1); transform: translateY(-1px); }
-    [data-testid="stMain"] button[kind="primary"] { background: #087e99 !important; color: white !important; border-color: #087e99 !important; }
-    [data-baseweb="select"] > div, [data-baseweb="input"] > div {
-      background: #ffffff !important; background-image: none !important;
-      border-color: #b9cdd3 !important; border-radius: 12px !important;
-    }
-    [data-baseweb="select"] *, [data-baseweb="input"] input { color: #173744 !important; }
-    [data-testid="stAlert"] { background: #ffffff !important; color: #173744 !important; }
-    [data-testid="stAlert"] p, [data-testid="stAlert"] span { color: #173744 !important; }
-    @media (max-width: 600px) {
-      .block-container { padding: 1rem .8rem 2.5rem; }
-      .wb-hero { padding: 20px; gap: 14px; border-radius: 20px; }
-      .wb-brand { font-size: 1.5rem; }
-      [data-testid="stMetricValue"] { font-size: 1.35rem !important; }
-    }
+    [data-testid="stMain"] button { border-radius:13px; border:1px solid #c8e6eb; background:#eaf7f9; color:#124757 !important; font-weight:700; transition:transform .15s ease,box-shadow .15s ease; }
+    [data-testid="stMain"] button:hover { border-color:#6fc6ce; background:#def3f5; box-shadow:0 5px 12px rgba(19,117,133,.1); transform:translateY(-1px); }
+    [data-testid="stMain"] button[kind="primary"] { background:#087e99 !important; color:white !important; border-color:#087e99 !important; }
+    [data-baseweb="select"] > div, [data-baseweb="input"] > div { background:#ffffff !important; background-image:none !important; border-color:#b9cdd3 !important; border-radius:12px !important; }
+    [data-baseweb="select"] *, [data-baseweb="input"] input { color:#173744 !important; }
+    @media (max-width:600px) { .block-container { padding:1rem .8rem 2.5rem; } .wb-hero { padding:20px; gap:14px; border-radius:20px; } .wb-brand { font-size:1.5rem; } [data-testid="stMetricValue"] { font-size:1.35rem !important; } }
     </style>
     """,
     unsafe_allow_html=True,
@@ -196,15 +143,15 @@ with st.container(border=True):
         '<span>left to reach your daily goal</span></div>',
         unsafe_allow_html=True,
     )
-
     if total >= goal:
-        st.success("Great job! You reached your goal today! 🎉")
+        message = "Great job! You reached your goal today! 🎉"
     elif percent >= 75:
-        st.info("Almost there! You are past 75%. 🌊")
+        message = "Almost there! You are past 75%. 🌊"
     elif percent >= 50:
-        st.info("Great! You reached 50%! 😊")
+        message = "Great! You reached 50%! 😊"
     else:
-        st.info("You’re doing well. Every glass gets you closer! 💙")
+        message = "You’re doing well. Every glass gets you closer! 💙"
+    show_message(message)
 
 st.subheader("Log some water")
 st.caption("Choose a quick pour or enter your own amount.")
@@ -228,7 +175,7 @@ if st.session_state.entries:
     st.write(" · ".join(f"{amount:,} ml" for amount in reversed(st.session_state.entries)))
 
 if st.session_state.show_reset_confirm:
-    st.warning("Start a new day?")
+    show_message("Start a new day?")
     reset_col, cancel_col = st.columns(2)
     with reset_col:
         st.button("Yes, reset", type="primary", use_container_width=True, on_click=reset_new_day)
