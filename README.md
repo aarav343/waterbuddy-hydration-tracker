@@ -12,12 +12,8 @@ WaterBuddy is a daily hydration tracker built with Python and Streamlit. It help
 
 Daily values stay in the current Streamlit session. They are not saved to an account or database.
 
-## Open the app
+## Streamlit
 
-[WaterBuddy on Streamlit](https://water-buddy-hydration-tracker.streamlit.app/)
-
-## Source
-
-[WaterBuddy on GitHub](https://github.com/aarav343/waterbuddy-hydration-tracker)
+https://water-buddy-hydration-tracker.streamlit.app/
 
 The Streamlit entry point is `app.py`.
