@@ -1,4 +1,4 @@
-# WaterBuddy: Your Daily Hydration Companion
+# Water Buddy Hydration Tracker
 
 WaterBuddy is a daily hydration tracker built with Python and Streamlit. It helps users set an age-based daily water goal, record drinks, and see their progress.
 
