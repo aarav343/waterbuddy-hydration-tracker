@@ -56,26 +56,70 @@ for key, value in {
 st.markdown(
     """
     <style>
-    :root { color-scheme: light; }
-    [data-testid="stAppViewContainer"] {
-      background: linear-gradient(180deg, #eaf8fb 0, #f5fbfc 360px, #f7fafb 100%);
-      color: #183b49;
+    :root {
+      color-scheme: light !important;
+      --primary-color: #087e99;
+      --background-color: #f3f7f8;
+      --secondary-background-color: #ffffff;
+      --text-color: #173744;
     }
-    [data-testid="stHeader"] { background: transparent; }
-    [data-testid="stMain"] { color: #183b49; }
+    html, body, .stApp,
+    [data-testid="stAppViewContainer"],
+    [data-testid="stMain"],
+    [data-testid="stMainBlockContainer"] {
+      color-scheme: light !important;
+      color: #173744 !important;
+      background: #f3f7f8 !important;
+      background-image: none !important;
+    }
+    [data-testid="stHeader"] { background: #f3f7f8 !important; }
     [data-testid="stMain"] h1, [data-testid="stMain"] h2,
     [data-testid="stMain"] h3, [data-testid="stMain"] h4,
     [data-testid="stMain"] p, [data-testid="stMain"] label,
+    [data-testid="stMain"] span, [data-testid="stMain"] [data-testid="stCaptionContainer"],
     [data-testid="stMain"] [data-testid="stMetricLabel"],
     [data-testid="stMain"] [data-testid="stMetricValue"],
     [data-testid="stMain"] [data-testid="stMetricDelta"] {
-      color: #183b49 !important;
+      color: #173744 !important;
+    }
+    [data-testid="stMain"] input,
+    [data-testid="stMain"] [role="combobox"],
+    [data-testid="stMain"] [role="spinbutton"],
+    [data-testid="stMain"] [data-baseweb="select"],
+    [data-testid="stMain"] [data-baseweb="input"] {
+      color: #173744 !important;
+      -webkit-text-fill-color: #173744 !important;
+      background: #ffffff !important;
+      background-image: none !important;
+      border-color: #b9cdd3 !important;
+    }
+    [data-testid="stMain"] [role="alert"],
+    [data-testid="stMain"] [data-testid="stAlert"] {
+      color: #173744 !important;
+      background: #edf7f8 !important;
+      background-image: none !important;
+      border: 1px solid #c9e2e6 !important;
+      border-radius: 12px !important;
+    }
+    [data-testid="stMain"] [role="alert"] *,
+    [data-testid="stMain"] [data-testid="stAlert"] * {
+      color: #173744 !important;
+      -webkit-text-fill-color: #173744 !important;
+      background-image: none !important;
+    }
+    [data-testid="stMain"] [role="progressbar"] {
+      background: #dcebed !important;
+      border-radius: 999px !important;
+    }
+    [data-testid="stMain"] [role="progressbar"] > div {
+      background: #0b91a5 !important;
+      border-radius: 999px !important;
     }
     .block-container { max-width: 820px; padding: 1.5rem 1.1rem 3rem; }
     .wb-hero {
       display: flex; align-items: center; gap: 18px; margin: 0 0 1.4rem;
       padding: 25px 27px; border-radius: 24px;
-      background: linear-gradient(120deg, #087e99 0%, #12a9b7 55%, #41c5c0 100%);
+      background: #087e99 !important;
       box-shadow: 0 15px 35px rgba(9, 105, 124, .18);
     }
     .wb-drop {
@@ -87,8 +131,9 @@ st.markdown(
     .wb-tagline { color: #e7ffff !important; margin-top: 5px; font-size: .98rem; }
     .wb-kicker { color: #e0ffff !important; font-size: .72rem; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; margin-bottom: 4px; }
     [data-testid="stVerticalBlockBorderWrapper"] {
-      border-color: #d8e9ed !important; border-radius: 20px !important;
-      background: rgba(255,255,255,.91); box-shadow: 0 8px 24px rgba(24, 76, 91, .055);
+      border: 1px solid #d5e1e5 !important; border-radius: 20px !important;
+      background: #ffffff !important; background-image: none !important;
+      box-shadow: 0 6px 18px rgba(24, 76, 91, .06);
     }
     [data-testid="stMetricLabel"] p { color: #55717c !important; font-size: .83rem !important; }
     [data-testid="stMetricValue"] { color: #123b49 !important; font-weight: 750 !important; }
@@ -98,15 +143,18 @@ st.markdown(
     .wb-remaining span { color:#54727c; font-size:.9rem; }
     [data-testid="stMain"] button {
       border-radius: 13px; border: 1px solid #c8e6eb; background: #eaf7f9;
-      color: #155364 !important; font-weight: 700;
+      color: #124757 !important; font-weight: 700;
       transition: transform .15s ease, box-shadow .15s ease;
     }
     [data-testid="stMain"] button:hover { border-color: #6fc6ce; background: #def3f5; box-shadow: 0 5px 12px rgba(19, 117, 133, .1); transform: translateY(-1px); }
-    [data-testid="stMain"] button[kind="primary"] { background: #0c899e; color: white !important; border-color: #0c899e; }
+    [data-testid="stMain"] button[kind="primary"] { background: #087e99 !important; color: white !important; border-color: #087e99 !important; }
     [data-baseweb="select"] > div, [data-baseweb="input"] > div {
-      background: white !important; border-color: #cbdfe4 !important; border-radius: 12px !important;
+      background: #ffffff !important; background-image: none !important;
+      border-color: #b9cdd3 !important; border-radius: 12px !important;
     }
-    [data-baseweb="select"] *, [data-baseweb="input"] input { color: #183b49 !important; }
+    [data-baseweb="select"] *, [data-baseweb="input"] input { color: #173744 !important; }
+    [data-testid="stAlert"] { background: #ffffff !important; color: #173744 !important; }
+    [data-testid="stAlert"] p, [data-testid="stAlert"] span { color: #173744 !important; }
     @media (max-width: 600px) {
       .block-container { padding: 1rem .8rem 2.5rem; }
       .wb-hero { padding: 20px; gap: 14px; border-radius: 20px; }
